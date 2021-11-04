@@ -145,8 +145,9 @@ export default function Home() {
   })
 
   const { data: templates } = useSWR('/api/template',fetcher)
-
+  
   useEffect(()=>{
+    setTemplatesFull(templates);
     const templatesArrayToShow = (templates||[]).map((template)=>{
       return {
         optionLabel: template.name + " | " + template.author,
