@@ -131,6 +131,7 @@ const cssOutput = ( formValues ) => {
 
 export default function Home() {
   const [ siderTheme, setSiderTheme ] = useState<"light"|"dark">('light')
+  const [ templatesFull, setTemplatesFull ] = useState<any>([])
   const [ templatesToShow, setTemplatesToShow ] = useState<any>([])
   const [ formValues, setFormValues ] = useState<any>({
     style: "Linear",
@@ -222,6 +223,7 @@ export default function Home() {
             setFormValues(newValues)
             const newTemplates = await fetch('/api/template')
             const data = await newTemplates.json()
+            setTemplatesFull(data)
             const templatesArrayToShow = (data||[]).map((template)=>{
               return {
                 optionLabel: template.name + " | " + template.author,
@@ -245,23 +247,25 @@ export default function Home() {
               },
               options: templatesToShow,
               customOnChange: ( value, rows, setFieldValue, resetForm, values ) => {
-                const selectedTemplate = templates.find(template=>template.id === value);
-                setFieldValue('name',selectedTemplate.name)
-                setFieldValue('author',selectedTemplate.author)
-                setFieldValue('style',selectedTemplate.attributes.style)
-                setFieldValue('direction',selectedTemplate.attributes.direction)
-                setFieldValue('color1',selectedTemplate.attributes.color1)
-                setFieldValue('color2',selectedTemplate.attributes.color2)
-                setFieldValue('colorFormat',selectedTemplate.attributes.colorFormat)
-                setFormValues({
-                  style: selectedTemplate.attributes.style,
-                  direction: selectedTemplate.attributes.direction,
-                  color1: selectedTemplate.attributes.color1,
-                  color2: selectedTemplate.attributes.color2,
-                  name: selectedTemplate.name,
-                  author: selectedTemplate.author,
-                  colorFormat: selectedTemplate.attributes.colorFormat
-                })
+                const selectedTemplate = templatesFull.find(template=>template.id === value);
+                if(selectedTemplate){
+                  setFieldValue('name',selectedTemplate.name)
+                  setFieldValue('author',selectedTemplate.author)
+                  setFieldValue('style',selectedTemplate.attributes.style)
+                  setFieldValue('direction',selectedTemplate.attributes.direction)
+                  setFieldValue('color1',selectedTemplate.attributes.color1)
+                  setFieldValue('color2',selectedTemplate.attributes.color2)
+                  setFieldValue('colorFormat',selectedTemplate.attributes.colorFormat)
+                  setFormValues({
+                    style: selectedTemplate.attributes.style,
+                    direction: selectedTemplate.attributes.direction,
+                    color1: selectedTemplate.attributes.color1,
+                    color2: selectedTemplate.attributes.color2,
+                    name: selectedTemplate.name,
+                    author: selectedTemplate.author,
+                    colorFormat: selectedTemplate.attributes.colorFormat
+                  })
+                }
               }
             }
           ]
