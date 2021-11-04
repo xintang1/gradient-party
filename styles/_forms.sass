@@ -1,0 +1,42 @@
+@use 'variables'
+
+.formik-form 
+  .ant-form-item 
+    margin-right: 10px
+    .ant-form-item-label 
+      label 
+        font-size: 18px
+        margin-bottom: 0.5em
+        color: rgba(0, 0, 0, 0.85)
+        font-weight: 500
+    .ant-radio-button-wrapper
+      &.ant-radio-button-wrapper
+        border-radius: 2px
+        border-width: 1px
+        margin-right: 5px
+      &::before
+        background-color: transparent
+    .direction-input-options
+      .ant-radio-button-wrapper
+        width: 30%
+        text-align: center
+        margin-bottom: 5px
+    .colorpicker-input-btn
+      border-radius: 4px
+      color: transparent
+  .actions-section 
+    padding-top: 30px
+    button 
+      margin-right: 20px
+      margin-bottom: 15px
+      min-width: 120px
+    
+    @media screen and ( max-width: variables.$small)
+      text-align: center  
+  
+  .list-actions 
+    button.custom-added 
+      margin-right: 5px
+
+.separator-title 
+  margin: 1rem 0

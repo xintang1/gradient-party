@@ -1,0 +1,25 @@
+@use '~antd/dist/antd'
+@use 'variables'
+@use 'forms'
+
+.layout-container
+  background: variables.$layout-container-background
+  flex-direction: inherit
+  .content-container
+    min-height: 100vh
+    text-align: center
+    margin: auto
+  .content-sider
+    padding: 20px
+    max-height: 100vh
+    overflow: auto
+    .title
+      font-size: 18px
+      padding-right: 25px
+      margin-bottom: 15px
+    .sider-theme-btn
+      float: right
+    .ant-layout-sider-light
+      background: #fff
+    .ant-layout-sider-dark
+      background: #262833
